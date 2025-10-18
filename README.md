@@ -102,7 +102,7 @@ Space-inspired, mysterious effects
 
 ```bash
 # Clone the repository
-git clone <YOUR_GIT_URL>
+git clone https://github.com/ELMACHHOUNE/BlurCSS-gotodev
 
 # Navigate to project directory
 cd BlurCSS-gotodev
@@ -174,26 +174,53 @@ Pure HTML/CSS for any project
 
 ## 🤝 Contributing
 
-Contributions are welcome! Here's how you can help:
+This project is open source under the MIT License. Contributions are welcome!
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### Quick Start (Fork -> Branch -> PR)
 
-### Ideas for Contributions
+1. Fork the repository on GitHub
+2. Clone your fork
 
-- Add more preset styles
-- Improve glassmorphism and neumorphism generators
-- Add color picker for background/glass colors
-- Create preset sharing functionality
-- Add animation options
-- Improve mobile experience
+```bash
+git clone https://github.com/ELMACHHOUNE/BlurCSS-gotodev.git
+cd BlurCSS-gotodev
+```
+
+3. Create a feature branch
+
+```bash
+git checkout -b feat/your-change
+```
+
+4. Install and run locally
+
+```bash
+npm install
+npm run dev
+```
+
+5. Commit and push
+
+```bash
+git add -A
+git commit -m "feat: short description of your change"
+git push -u origin feat/your-change
+```
+
+6. Open a Pull Request from your branch to the main branch of the upstream repo
+
+### PR checklist
+
+- Run and verify locally: npm run dev
+- Build succeeds: npm run build
+- Update docs if your change impacts usage
+- Keep commits clear (Conventional Commits preferred)
+
+If you have write access to the repo, you can clone directly and still use a feature branch + PR workflow.
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for details. Open source and free to use.
 
 ## 🙏 Acknowledgments
 
@@ -208,4 +235,5 @@ Have questions or suggestions? Open an issue or contribute!
 
 ---
 
-Made with ❤️ by the open-source community
+Made with ❤️ by GoToDev
+https://www.gotodev.ma
