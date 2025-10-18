@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { Layout } from "./components/layout/Layout";
 import { AppBackground } from "./components/background/AppBackground";
+import { Analytics } from "@vercel/analytics/react";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +17,7 @@ const App = () => (
       <AppBackground>
         <Toaster />
         <Sonner />
+        <Analytics />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
