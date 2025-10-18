@@ -18,7 +18,7 @@ export const Footer = () => {
             <span className="sr-only">GitHub</span>
           </a>
           <a
-            href="https://www.linkedin.com/in/mohamed-el-machhoune"
+            href="https://www.linkedin.com/company/gotodev-ma/"
             target="_blank"
             rel="noopener noreferrer"
             className="glass-button p-2 rounded-lg text-sm font-medium text-foreground"
