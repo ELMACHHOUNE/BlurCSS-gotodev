@@ -69,47 +69,65 @@ const Index = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative border-b border-glass-border bg-gradient-to-b from-card/30 to-transparent">
-        <div className="container mx-auto px-6 py-12 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-primary bg-clip-text text-transparent">
-            Build modern glass, blur, and soft-shadow effects
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Live preview, instant CSS, and fine-grained controls for Liquid
-            Glass, Glassmorphism, and Neumorphism.
-          </p>
+      <section className="relative isolate overflow-hidden border-b border-glass-border">
+        {/* Decorative background */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+        >
+          <div className="absolute -top-28 -left-28 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
+          <div className="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
+          <div className="absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)] bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:28px_28px]" />
+        </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-6">
-            <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-              Liquid Glass
-            </span>
-            <span className="px-3 py-1 rounded-full text-xs font-medium bg-foreground/5 text-foreground/90 border border-glass-border">
-              Glassmorphism
-            </span>
-            <span className="px-3 py-1 rounded-full text-xs font-medium bg-foreground/5 text-foreground/90 border border-glass-border">
-              Neumorphism
-            </span>
+        <div className="container relative mx-auto px-6 py-16 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-glass-border/60 bg-card/60 text-xs font-medium backdrop-blur-md">
+            <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+            Refreshed UI • v1
           </div>
 
-          <div className="flex items-center justify-center gap-3 mt-8">
+          <h1 className="mt-5 text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+            Design crisp glass, blur, and soft shadows
+            <span className="block bg-gradient-primary bg-clip-text text-transparent">
+              with zero CSS guesswork
+            </span>
+          </h1>
+
+          <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
+            Craft Liquid Glass, Glassmorphism, and Neumorphism with live preview
+            and production‑ready CSS.
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a
-              href="#"
+              href="https://github.com/ELMACHHOUNE/BlurCSS-gotodev"
               className="px-5 py-2.5 rounded-lg glass-button text-sm font-semibold"
+              target="_blank"
             >
               Start building
             </a>
             <a
-              href="https://www.producthunt.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2.5 rounded-lg border border-glass-border/80 bg-card/50 text-sm font-medium text-foreground hover:bg-card/70 transition"
+              href="#controls"
+              className="px-5 py-2.5 rounded-lg border border-glass-border/80 bg-card/60 hover:bg-card text-sm font-semibold"
             >
-              View launch
+              Explore presets
             </a>
           </div>
 
-          <p className="text-sm text-muted-foreground mt-6">
-            Tweak parameters and copy CSS in seconds.
+          <div className="mt-8 inline-flex items-center rounded-xl border border-glass-border bg-card/60 backdrop-blur-md overflow-hidden">
+            <span className="px-4 py-2 text-xs font-medium bg-primary/10 text-primary border-r border-glass-border">
+              Liquid Glass
+            </span>
+            <span className="px-4 py-2 text-xs font-medium text-foreground/80 border-r border-glass-border/80">
+              Glassmorphism
+            </span>
+            <span className="px-4 py-2 text-xs font-medium text-foreground/80">
+              Neumorphism
+            </span>
+          </div>
+
+          <p className="mt-6 text-sm text-muted-foreground">
+            No signup. Tweak parameters and copy CSS in seconds.
           </p>
         </div>
       </section>
@@ -165,8 +183,34 @@ const Index = () => {
         </section>
 
         {/* Controls Panel */}
-        <section className="md:container md:mx-auto md:px-6 md:pb-12">
+        <section
+          id="controls"
+          className="md:container md:mx-auto md:px-6 md:pb-12"
+        >
           <div className="glass-panel w-full flex flex-col md:overflow-visible md:h-auto md:mx-auto pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] bg-card/70 md:bg-transparent">
+            {/* Advanced Controls on mobile (before presets inside Controls Panel) */}
+            {showAdvanced && (
+              <div className="md:hidden mb-4">
+                <AdvancedControls
+                  effectType={effectType}
+                  preset={
+                    effectType === "liquid-glass"
+                      ? customLiquidGlass
+                      : effectType === "glassmorphism"
+                      ? selectedGlassmorphism
+                      : selectedNeumorphism
+                  }
+                  onUpdate={
+                    effectType === "liquid-glass"
+                      ? handleLiquidGlassUpdate
+                      : effectType === "glassmorphism"
+                      ? handleGlassmorphismUpdate
+                      : handleNeumorphismUpdate
+                  }
+                  onReset={handleReset}
+                />
+              </div>
+            )}
             <ControlsPanel
               effectType={effectType}
               setEffectType={setEffectType}

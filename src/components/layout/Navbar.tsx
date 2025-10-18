@@ -1,5 +1,4 @@
 import { Github, Linkedin, Globe } from "lucide-react";
-// Import logo from public. If your bundler doesn't support importing from /public, use const logoUrl = "/blurcss.webp";
 import logoUrl from "/blurcss.webp";
 
 export const Navbar = () => {
@@ -16,9 +15,6 @@ export const Navbar = () => {
             <div className="leading-tight">
               <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                 Blur CSS
-              </span>
-              <span className="block text-xs text-muted-foreground">
-                Liquid Glass • Glassmorphism • Neumorphism
               </span>
             </div>
           </a>
