@@ -13,13 +13,9 @@ import {
   NeumorphismPreset,
   EffectType,
 } from "@/types/effect";
-// Import logo from public. If your bundler doesn't support importing from /public, use const logoUrl = "/blurcss.webp";
-import logoUrl from "/blurcss.webp";
-// Add Lucide icons
-import { Github, Linkedin, Globe } from "lucide-react";
 
 const Index = () => {
-  const [effectType, setEffectType] = useState<EffectType>("liquid-glass");
+  const [effectType, setEffectType] = useState<EffectType>("neumorphism");
 
   const [selectedLiquidGlass, setSelectedLiquidGlass] =
     useState<LiquidGlassPreset>(liquidGlassPresets[0]);
@@ -71,63 +67,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur bg-card/70 border-b border-glass-border">
-        <div className="container mx-auto px-6 py-3">
-          <div className="flex items-center justify-between gap-4">
-            <a href="/" className="flex items-center gap-3">
-              <img
-                src={logoUrl}
-                alt="Blur CSS logo"
-                className="h-8 w-8 rounded-xl object-cover shadow-inner shadow-primary/30"
-              />
-              <div className="leading-tight">
-                <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Blur CSS
-                </span>
-                <span className="block text-xs text-muted-foreground">
-                  Liquid Glass • Glassmorphism • Neumorphism
-                </span>
-              </div>
-            </a>
-
-            <nav className="flex items-center gap-2">
-              <a
-                href="https://github.com/ELMACHHOUNE/BlurCSS-gotodev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-button p-2 rounded-lg text-sm font-medium text-foreground"
-                aria-label="GitHub repository"
-              >
-                <Github className="h-4 w-4" />
-                <span className="sr-only">GitHub</span>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/mohamed-el-machhoune"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-button p-2 rounded-lg text-sm font-medium text-foreground"
-                aria-label="LinkedIn profile"
-              >
-                <Linkedin className="h-4 w-4" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-              <a
-                href="https://gotodev.ma"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-button p-2 rounded-lg text-sm font-medium text-foreground"
-                aria-label="GotoDev website"
-              >
-                <Globe className="h-4 w-4" />
-                <span className="sr-only">GotoDev</span>
-              </a>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+    <>
       {/* Hero Section */}
       <section className="relative border-b border-glass-border bg-gradient-to-b from-card/30 to-transparent">
         <div className="container mx-auto px-6 py-12 text-center">
@@ -174,9 +114,21 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Mobile Preview (mobile only) */}
+      <section className="block md:hidden container mx-auto px-6 py-6">
+        <div className="glass-panel overflow-hidden">
+          <PreviewPanel
+            effectType={effectType}
+            liquidGlassPreset={customLiquidGlass}
+            glassmorphismPreset={selectedGlassmorphism}
+            neumorphismPreset={selectedNeumorphism}
+          />
+        </div>
+      </section>
+
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        {/* Preview Panel */}
+        {/* Preview Panel (desktop only) */}
         <section className="hidden md:block container mx-auto px-6 py-8">
           <div className="glass-panel overflow-hidden max-w-5xl mx-auto">
             <PreviewPanel
@@ -213,8 +165,8 @@ const Index = () => {
         </section>
 
         {/* Controls Panel */}
-        <section className="fixed inset-0 z-[60] md:static md:inset-auto md:container md:mx-auto md:px-6 md:pb-12">
-          <div className="glass-panel w-full h-full flex flex-col overflow-y-auto md:overflow-visible md:h-auto md:mx-auto pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] bg-card/70 md:bg-transparent">
+        <section className="md:container md:mx-auto md:px-6 md:pb-12">
+          <div className="glass-panel w-full flex flex-col md:overflow-visible md:h-auto md:mx-auto pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] bg-card/70 md:bg-transparent">
             <ControlsPanel
               effectType={effectType}
               setEffectType={setEffectType}
@@ -231,7 +183,7 @@ const Index = () => {
           </div>
         </section>
       </div>
-    </div>
+    </>
   );
 };
 
