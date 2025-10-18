@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ControlsPanel } from "@/components/ControlsPanel";
 import { PreviewPanel } from "@/components/PreviewPanel";
 import { AdvancedControls } from "@/components/AdvancedControls";
@@ -28,11 +28,38 @@ const Index = () => {
   const [selectedNeumorphism, setSelectedNeumorphism] =
     useState<NeumorphismPreset>(neumorphismPresets[0]);
 
-  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(true);
+
+  // Refs for preview containers (mobile and desktop)
+  const mobilePreviewRef = useRef<HTMLDivElement | null>(null);
+  const desktopPreviewRef = useRef<HTMLDivElement | null>(null);
+
+  // Smooth scroll to the currently visible preview
+  const scrollToPreview = () => {
+    const isMobile =
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 767px)").matches;
+    const target = isMobile
+      ? mobilePreviewRef.current
+      : desktopPreviewRef.current;
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const handleLiquidGlassChange = (preset: LiquidGlassPreset) => {
     setSelectedLiquidGlass(preset);
     setCustomLiquidGlass(preset);
+    scrollToPreview();
+  };
+
+  // New handlers for preset clicks to also scroll
+  const handleGlassmorphismChange = (preset: GlassmorphismPreset) => {
+    setSelectedGlassmorphism(preset);
+    scrollToPreview();
+  };
+
+  const handleNeumorphismChange = (preset: NeumorphismPreset) => {
+    setSelectedNeumorphism(preset);
+    scrollToPreview();
   };
 
   const handleLiquidGlassUpdate = (preset: LiquidGlassPreset) => {
@@ -134,7 +161,7 @@ const Index = () => {
 
       {/* Mobile Preview (mobile only) */}
       <section className="block md:hidden container mx-auto px-6 py-6">
-        <div className="glass-panel overflow-hidden">
+        <div ref={mobilePreviewRef} className="glass-panel overflow-hidden">
           <PreviewPanel
             effectType={effectType}
             liquidGlassPreset={customLiquidGlass}
@@ -148,7 +175,10 @@ const Index = () => {
       <div className="flex-1 flex flex-col">
         {/* Preview Panel (desktop only) */}
         <section className="hidden md:block container mx-auto px-6 py-8">
-          <div className="glass-panel overflow-hidden max-w-5xl mx-auto">
+          <div
+            ref={desktopPreviewRef}
+            className="glass-panel overflow-hidden max-w-5xl mx-auto"
+          >
             <PreviewPanel
               effectType={effectType}
               liquidGlassPreset={customLiquidGlass}
@@ -218,8 +248,8 @@ const Index = () => {
               selectedGlassmorphism={selectedGlassmorphism}
               selectedNeumorphism={selectedNeumorphism}
               onLiquidGlassChange={handleLiquidGlassChange}
-              onGlassmorphismChange={setSelectedGlassmorphism}
-              onNeumorphismChange={setSelectedNeumorphism}
+              onGlassmorphismChange={handleGlassmorphismChange}
+              onNeumorphismChange={handleNeumorphismChange}
               onLiquidGlassUpdate={handleLiquidGlassUpdate}
               showAdvanced={showAdvanced}
               onToggleAdvanced={() => setShowAdvanced((v) => !v)}
