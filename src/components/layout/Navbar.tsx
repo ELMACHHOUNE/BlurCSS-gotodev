@@ -10,11 +10,11 @@ export const Navbar = () => {
             <img
               src={logoUrl}
               alt="Blur CSS logo"
-              className="h-8 w-8 rounded-xl object-cover shadow-inner shadow-primary/30"
+              className="h-8 p-[4px] w-8 rounded-md object-contain shadow-inner shadow-primary/30"
             />
             <div className="leading-tight">
               <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                Blur CSS
+                BlurCSS GoToDev
               </span>
             </div>
           </a>
