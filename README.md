@@ -237,3 +237,6 @@ Have questions or suggestions? Open an issue or contribute!
 
 Made with ❤️ by GoToDev
 https://www.gotodev.ma
+
+MOSTAFA AL MANNANI
+Développeur web full stack
